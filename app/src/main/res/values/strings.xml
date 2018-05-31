@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Popular Movies - Stage 1</string>
+
+    <string name="movie_imgv_content_desc">Movie poster image</string>
+
+
+    <string name="pref_sort_title">Sort order</string>
+
+    <string name="pref_sort_popular_label">Most Popular</string>
+    <string name="pref_sort_top_rated_label">Top Rated</string>
+
+    <string name="pref_sort_default_key" translatable="false">most_popular</string>
+    <string name="pref_sort_popular_key" translatable="false">most_popular</string>
+    <string name="pref_sort_top_rated_key" translatable="false">top_rated</string>
+
+
+
+
+    <!--Detail View -->
+    <string name="movie_detail_intent_key" translatable="false">movie_item</string>
+    <string name="movie_detail_release_date_label">Release date:</string>
+    <string name="movie_detail_rating_label">Rating:</string>
+
+    <string name="backdrop_image_ratio">9:5</string>
+    <string name="poster_image_ratio">2:3</string>
+
+
+</resources>

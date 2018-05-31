@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--<item-->
+        <!--android:id="@+id/action_change_sort_order"-->
+        <!--android:title="@string/pref_sort_title"-->
+        <!--app:showAsAction="collapseActionView"-->
+        <!--/>-->
+
+    <item
+        android:id="@+id/action_sort_top_rated"
+        android:title="@string/pref_sort_top_rated_label"
+        app:showAsAction="collapseActionView"
+        />
+
+    <item
+        android:id="@+id/action_sort_popular"
+        android:title="@string/pref_sort_popular_label"
+        app:showAsAction="collapseActionView"
+        />
+
+
+</menu>

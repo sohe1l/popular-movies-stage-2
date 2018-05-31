@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MovieDetailActivity">
+
+    <TextView
+        android:id="@+id/movie_title_tv"
+        style="@style/TextViewStyle"
+        android:layout_width="0dp"
+        android:textSize="@dimen/title_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Deadpool" />
+
+    <TextView
+        android:id="@+id/movie_release_date_label"
+        style="@style/TextViewStyle"
+        android:text="@string/movie_detail_release_date_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movie_title_tv" />
+
+    <TextView
+        android:id="@+id/movie_vote_average_label"
+        style="@style/TextViewStyle"
+        android:text="@string/movie_detail_rating_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movie_release_date_label" />
+
+    <TextView
+        android:id="@+id/movie_release_date_tv"
+        style="@style/TextViewStyle"
+        app:layout_constraintStart_toEndOf="@+id/movie_release_date_label"
+        app:layout_constraintTop_toBottomOf="@+id/movie_title_tv"
+        tools:text="2018-05-23" />
+
+    <TextView
+        android:id="@+id/movie_vote_average_tv"
+        style="@style/TextViewStyle"
+        app:layout_constraintStart_toEndOf="@+id/movie_vote_average_label"
+        app:layout_constraintTop_toBottomOf="@+id/movie_release_date_tv"
+        tools:text="4.5" />
+
+    <TextView
+        android:id="@+id/movie_overview_tv"
+        style="@style/TextViewStyle"
+        android:layout_width="0dp"
+        android:justificationMode="inter_word"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movie_vote_average_tv"
+        tools:text="Wade Wilson (Ryan Reynolds) is a former Special Forces operative who now works as a mercenary. His world comes crashing down when evil scientist Ajax (Ed Skrein) tortures, disfigures and transforms him into Deadpool. The rogue experiment leaves Deadpool with accelerated healing powers and a twisted...." />
+
+</android.support.constraint.ConstraintLayout>
