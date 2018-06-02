@@ -5,8 +5,7 @@
     <item
         android:id="@+id/action_favorites"
         android:title="@string/pref_favorites_label"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_star_border_black_24dp"
+        app:showAsAction="collapseActionView"
         />
 
     <item

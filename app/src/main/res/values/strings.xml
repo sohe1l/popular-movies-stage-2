@@ -12,6 +12,7 @@
     <string name="pref_sort_top_rated_label">Top Rated</string>
 
     <string name="pref_sort_default_key" translatable="false">most_popular</string>
+    <string name="pref_sort_favorites_key" translatable="false">user_favorites</string>
     <string name="pref_sort_popular_key" translatable="false">most_popular</string>
     <string name="pref_sort_top_rated_key" translatable="false">top_rated</string>
 
