@@ -27,6 +27,8 @@ public interface MovieDao {
     @Delete
     void delete(Movie movie);
 
+    @Query("SELECT * FROM movies where id = :id")
+    LiveData<Movie> getMovie(int id);
 
 //
 //    @Update
