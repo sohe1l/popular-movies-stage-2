@@ -3,6 +3,7 @@ package com.example.android.popularmovies_stage2;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
@@ -18,45 +19,12 @@ import com.example.android.popularmovies_stage2.utilities.NetworkUtilities;
 
 import java.util.List;
 
-public class MainViewModel extends AndroidViewModel
-        implements LoadJsonAsync.StringAsyncResponse
-{
-
-
-
-
-
-    private List<Movie> topRatedMovies;
-    private List<Movie> popularMovies;
-    private LiveData<List<Movie>> favoriteMovies;
-
-
-    public List<Movie> getTopRatedMovies() {
-
-        if (topRatedMovies == null) {
-            loadTopRatedMovies();
-        }
-        return topRatedMovies;
-    }
-
-    public List<Movie> getPopularMovies() {
-        if(popularMovies == null){
-            loadPopularMovies();
-        }
-        return popularMovies;
-    }
-
-    public LiveData<List<Movie>> getFavoriteMovies() {
-        if(favoriteMovies == null){
-            loadFavoriteMovies();
-        }
-        return favoriteMovies;
-    }
-
-
-
+public class MainViewModel extends AndroidViewModel {
 
     private AppDatabase mDb;
+    private MutableLiveData<List<Movie>> topRatedMovies;
+    private MutableLiveData<List<Movie>> popularMovies;
+    private LiveData<List<Movie>> favoriteMovies;
 
 
     public MainViewModel(@NonNull Application application) {
@@ -65,49 +33,55 @@ public class MainViewModel extends AndroidViewModel
         //refreshMovies(R.string.pref_sort_favorites_key);
     }
 
+    public LiveData<List<Movie>> getTopRatedMovies() {
 
-    private void refreshMovies(int type){
-        if(type == R.string.pref_sort_favorites_key){
-            Log.wtf("WTF", "refreshing movies from view model");
-            //movies = mDb.taskDao().getAll();
-
-        }else{
-            Log.wtf("WTF", "ELSE refreshing movies from view model");
-
-            /*
-            new LoadJsonAsync(this).execute(
-                    NetworkUtilities.getUrl(sortOrder, context)
-            );
-            */
+        if (topRatedMovies == null) {
+            topRatedMovies = new MutableLiveData<>();
+            loadTopRatedMovies();
         }
-
+        return topRatedMovies;
     }
 
-    private void loadTopRatedMovies(){
-        new LoadJsonAsync(this).execute(
+    public LiveData<List<Movie>> getPopularMovies() {
+        if (popularMovies == null) {
+            popularMovies = new MutableLiveData<>();
+            loadPopularMovies();
+        }
+        return popularMovies;
+    }
+
+    public LiveData<List<Movie>> getFavoriteMovies() {
+        if (favoriteMovies == null) {
+            loadFavoriteMovies();
+        }
+        return favoriteMovies;
+    }
+
+    private void loadTopRatedMovies() {
+        new LoadJsonAsync(new LoadJsonAsync.StringAsyncResponse() {
+            public void asyncProcessFinish(String res) {
+                Log.wtf("MainViewModel", "Async Top Rated Finished");
+
+                topRatedMovies.setValue(JsonUtilities.parseMovies(res));
+            }
+        }).execute(
                 NetworkUtilities.getTopRatedUrl()
         );
     }
 
-    private void loadPopularMovies(){
-        new LoadJsonAsync(this).execute(
+    private void loadPopularMovies() {
+        new LoadJsonAsync(new LoadJsonAsync.StringAsyncResponse() {
+            public void asyncProcessFinish(String res) {
+                Log.wtf("MainViewModel", "Async Popular Finished");
+                popularMovies.setValue(JsonUtilities.parseMovies(res));
+            }
+        }).execute(
                 NetworkUtilities.getPopularUrl()
         );
     }
 
-    private void loadFavoriteMovies(){
+    private void loadFavoriteMovies() {
         favoriteMovies = mDb.taskDao().getAll();
     }
-
-    @Override
-    public void asyncProcessFinish(String res) {
-        topRatedMovies = JsonUtilities.parseMovies(res);
-        popularMovies = JsonUtilities.parseMovies(res);
-    }
-
-
-
-
-
 
 }
