@@ -24,7 +24,8 @@ public class NetworkUtilities {
 
     private static final String API_TOP_RATED_PATH = "movie/top_rated/";
 
-    private static final String API_VIDEO_PATH = "movie/{id}/videos";
+    private static final String API_VIDEOS_PATH = "movie/{id}/videos";
+    private static final String API_REVIEWS_PATH = "movie/{id}/reviews";
 
     private static final String API_PARAM = "api_key";
 
@@ -64,7 +65,17 @@ public class NetworkUtilities {
 
     public static URL getVideosUrl(int movie_id){
         Uri uri = Uri.parse(API_BASE_URL).buildUpon()
-                .appendEncodedPath(API_VIDEO_PATH.replace("{id}", String.valueOf(movie_id)))
+                .appendEncodedPath(API_VIDEOS_PATH.replace("{id}", String.valueOf(movie_id)))
+                .appendQueryParameter(API_PARAM, getApiKey())
+                .build();
+
+        return buildURLFromURI(uri);
+    }
+
+
+    public static URL getReviewsUrl(int movie_id){
+        Uri uri = Uri.parse(API_BASE_URL).buildUpon()
+                .appendEncodedPath(API_REVIEWS_PATH.replace("{id}", String.valueOf(movie_id)))
                 .appendQueryParameter(API_PARAM, getApiKey())
                 .build();
 

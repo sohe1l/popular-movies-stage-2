@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.android.popularmovies_stage2.model.Movie;
+import com.example.android.popularmovies_stage2.model.Review;
 import com.example.android.popularmovies_stage2.model.Video;
 import com.example.android.popularmovies_stage2.utilities.JsonUtilities;
 import com.example.android.popularmovies_stage2.utilities.LoadJsonAsync;
@@ -18,6 +19,8 @@ import java.util.List;
 public class MovieDetailViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Video>> videos;
+    private MutableLiveData<List<Review>> reviews;
+
 
     public MovieDetailViewModel(@NonNull Application application) {
         super(application);
@@ -41,6 +44,27 @@ public class MovieDetailViewModel extends AndroidViewModel {
         }).execute(
                 NetworkUtilities.getVideosUrl(movie_id)
         );
+    }
+
+    public LiveData<List<Review>> getReviews(int movie_id){
+        if(reviews == null){
+            reviews = new MutableLiveData<>();
+            loadReviews(movie_id);
+        }
+        return reviews;
+    }
+
+    private void loadReviews(int movie_id){
+        new LoadJsonAsync(
+                new LoadJsonAsync.StringAsyncResponse() {
+                    @Override
+                    public void asyncProcessFinish(String output) {
+                        Log.wtf("MovieVidelViewModel", "Async Reviews finished");
+                        reviews.setValue(JsonUtilities.parseReviews(output));
+                    }
+                }
+        ).execute(NetworkUtilities.getReviewsUrl(movie_id));
+
     }
 
 
