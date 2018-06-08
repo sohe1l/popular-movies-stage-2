@@ -2,6 +2,7 @@ package com.example.android.popularmovies_stage2.utilities;
 
 
 import com.example.android.popularmovies_stage2.model.Movie;
+import com.example.android.popularmovies_stage2.model.Video;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -67,5 +68,52 @@ public class JsonUtilities {
             return null;
         }
     }
+
+
+
+
+
+    public static ArrayList<Video> parseVideos(String json){
+
+        ArrayList<Video> videos = new ArrayList<>();
+
+        try{
+            JSONObject jo = new JSONObject(json);
+
+            JSONArray jsonArray = jo.getJSONArray("results");
+
+            for(int i=0; i<jsonArray.length(); i++){
+                Video video = buildVideo(jsonArray.getJSONObject(i));
+                videos.add(video);
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+        return videos;
+
+    }
+
+    private static Video buildVideo(JSONObject jo){
+
+        try{
+            return new Video(
+                    jo.optString("id"),
+                    jo.optString("key"),
+                    jo.optString("name"),
+                    jo.optString("site"),
+                    jo.optInt("size"),
+                    jo.optString("type")
+            );
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 
 }

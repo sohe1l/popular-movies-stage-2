@@ -2,6 +2,7 @@ package com.example.android.popularmovies_stage2;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,10 @@ import android.widget.TextView;
 
 import com.example.android.popularmovies_stage2.database.AppDatabase;
 import com.example.android.popularmovies_stage2.model.Movie;
+import com.example.android.popularmovies_stage2.model.Video;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
@@ -93,6 +97,20 @@ public class MovieDetailActivity extends AppCompatActivity {
                             isFavorite = false;
                             imgv_fav.setImageResource(star_off_res_id);
                         }
+                    }
+                });
+
+
+
+                //load videos
+                MovieDetailViewModel viewModel = ViewModelProviders.of(this).get(MovieDetailViewModel.class);
+
+                viewModel.getVideos(movie.getId()).observe(this, new Observer<List<Video>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Video> res) {
+
+                        Log.wtf("MOVIE DETAIL ACTIVITY", "Observe Updated videos");
+
                     }
                 });
 

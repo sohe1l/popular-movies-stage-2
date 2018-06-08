@@ -24,6 +24,8 @@ public class NetworkUtilities {
 
     private static final String API_TOP_RATED_PATH = "movie/top_rated/";
 
+    private static final String API_VIDEO_PATH = "movie/{id}/videos";
+
     private static final String API_PARAM = "api_key";
 
     private static final int TIMEOUT = 5009;
@@ -59,6 +61,15 @@ public class NetworkUtilities {
         return buildURLFromURI(uri);
     }
 
+
+    public static URL getVideosUrl(int movie_id){
+        Uri uri = Uri.parse(API_BASE_URL).buildUpon()
+                .appendEncodedPath(API_VIDEO_PATH.replace("{id}", String.valueOf(movie_id)))
+                .appendQueryParameter(API_PARAM, getApiKey())
+                .build();
+
+        return buildURLFromURI(uri);
+    }
 
 
     // ref: sunshine app

@@ -29,8 +29,7 @@ public class MainViewModel extends AndroidViewModel {
 
     public MainViewModel(@NonNull Application application) {
         super(application);
-        mDb = AppDatabase.getInstance(this.getApplication());
-        //refreshMovies(R.string.pref_sort_favorites_key);
+        mDb = AppDatabase.getInstance(this.getApplication().getApplicationContext());
     }
 
     public LiveData<List<Movie>> getTopRatedMovies() {
