@@ -26,6 +26,8 @@
 
     <string name="backdrop_image_ratio">9:5</string>
     <string name="poster_image_ratio">2:3</string>
+    <string name="movie_detail_videos_title">Videos</string>
+    <string name="movie_detail_reviews_label">Reviews</string>
 
 
 </resources>

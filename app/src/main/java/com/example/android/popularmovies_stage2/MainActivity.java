@@ -11,6 +11,8 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView.LayoutManager;
 import com.example.android.popularmovies_stage2.model.Movie;
+import com.example.android.popularmovies_stage2.utilities.RecyclerItemClickListener;
+
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -31,7 +33,7 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity
-        implements MovieAdapter.MovieClickListener, LoadJsonAsync.StringAsyncResponse {
+        implements RecyclerItemClickListener, LoadJsonAsync.StringAsyncResponse {
 
     private final String SORT_ORDER_KEY = "sort_order";
 
@@ -103,15 +105,6 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(SORT_ORDER_KEY, key);
         editor.apply();
-    }
-
-
-
-    @Override
-    public void onMovieClick(int index) {
-        Intent movieDetail = new Intent(this, MovieDetailActivity.class);
-        movieDetail.putExtra(getString(R.string.movie_detail_intent_key), movies.get(index));
-        startActivity(movieDetail);
     }
 
 
@@ -192,5 +185,12 @@ public class MainActivity extends AppCompatActivity
     public void asyncProcessFinish(String res) {
         movies = JsonUtilities.parseMovies(res);
         updateMovies();
+    }
+
+    @Override
+    public void onRecyclerItemClicked(int index) {
+        Intent movieDetail = new Intent(this, MovieDetailActivity.class);
+        movieDetail.putExtra(getString(R.string.movie_detail_intent_key), movies.get(index));
+        startActivity(movieDetail);
     }
 }

@@ -4,9 +4,14 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,17 +20,22 @@ import android.widget.TextView;
 import com.example.android.popularmovies_stage2.database.AppDatabase;
 import com.example.android.popularmovies_stage2.model.Movie;
 import com.example.android.popularmovies_stage2.model.Video;
+import com.example.android.popularmovies_stage2.utilities.NetworkUtilities;
+import com.example.android.popularmovies_stage2.utilities.RecyclerItemClickListener;
 import com.squareup.picasso.Picasso;
 
+import java.net.URL;
 import java.util.List;
 
-public class MovieDetailActivity extends AppCompatActivity {
+public class MovieDetailActivity extends AppCompatActivity implements RecyclerItemClickListener{
 
     private AppDatabase mDb;
     private Movie movie;
     Boolean isFavorite = false;
     int star_on_res_id;
     int star_off_res_id;
+
+    private List<Video> videos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,9 +118,9 @@ public class MovieDetailActivity extends AppCompatActivity {
                 viewModel.getVideos(movie.getId()).observe(this, new Observer<List<Video>>() {
                     @Override
                     public void onChanged(@Nullable List<Video> res) {
-
                         Log.wtf("MOVIE DETAIL ACTIVITY", "Observe Updated videos");
-
+                        videos = res;
+                        updateVideos();
                     }
                 });
 
@@ -122,6 +132,19 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     }
 
+
+    private void updateVideos(){
+
+        VideoAdapter videoAdapter = new VideoAdapter(videos, this);
+
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_videos);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(videoAdapter);
+    }
 
 
     private void onFavClicked(){
@@ -135,5 +158,15 @@ public class MovieDetailActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onRecyclerItemClicked(int index) {
+        Video selectedVideo = videos.get(index);
+        Uri youtubeUri = NetworkUtilities.getYoutubeUri(selectedVideo.getKey());
+        Intent intent = new Intent(Intent.ACTION_VIEW, youtubeUri);
+        if(intent.resolveActivity(getPackageManager()) != null){
+            startActivity(intent);
+        }
     }
 }

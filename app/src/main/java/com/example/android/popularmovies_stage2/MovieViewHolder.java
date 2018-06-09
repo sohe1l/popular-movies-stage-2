@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.android.popularmovies_stage2.model.Movie;
+import com.example.android.popularmovies_stage2.utilities.RecyclerItemClickListener;
 import com.squareup.picasso.Picasso;
 
 public class MovieViewHolder extends RecyclerView.ViewHolder
@@ -13,10 +14,10 @@ public class MovieViewHolder extends RecyclerView.ViewHolder
 
     private final ImageView imageView;
     private final Context context;
-    final private MovieAdapter.MovieClickListener mOnMovieClickListener;
+    final private RecyclerItemClickListener mOnMovieClickListener;
 
 
-    MovieViewHolder(View itemView, Context context, MovieAdapter.MovieClickListener clickListener) {
+    MovieViewHolder(View itemView, Context context, RecyclerItemClickListener clickListener) {
         super(itemView);
 
         this.context = context;
@@ -37,6 +38,6 @@ public class MovieViewHolder extends RecyclerView.ViewHolder
     @Override
     public void onClick(View v) {
         int clickedPos = getAdapterPosition();
-        mOnMovieClickListener.onMovieClick(clickedPos);
+        mOnMovieClickListener.onRecyclerItemClicked(clickedPos);
     }
 }

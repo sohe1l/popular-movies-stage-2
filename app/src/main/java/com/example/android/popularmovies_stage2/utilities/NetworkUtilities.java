@@ -29,6 +29,10 @@ public class NetworkUtilities {
 
     private static final String API_PARAM = "api_key";
 
+    private static final String YOUTUBE_VIDEO_PATH = "https://www.youtube.com/watch";
+    private static final String YOUTUBE_VIDEO_PARAM = "v";
+
+
     private static final int TIMEOUT = 5009;
 
 
@@ -81,6 +85,14 @@ public class NetworkUtilities {
 
         return buildURLFromURI(uri);
     }
+
+
+    public static Uri getYoutubeUri(String video_id){
+        return Uri.parse(YOUTUBE_VIDEO_PATH).buildUpon()
+                .appendQueryParameter(YOUTUBE_VIDEO_PARAM, video_id)
+                .build();
+    }
+
 
 
     // ref: sunshine app

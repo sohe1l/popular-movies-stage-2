@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.android.popularmovies_stage2.model.Movie;
+import com.example.android.popularmovies_stage2.utilities.RecyclerItemClickListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -16,12 +17,12 @@ import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
-    final private MovieClickListener mOnMovieClickListener;
+    final private RecyclerItemClickListener mOnMovieClickListener;
 
     private List<Movie> movies;
 
 
-    MovieAdapter(List<Movie> movies, MovieClickListener listener){
+    MovieAdapter(List<Movie> movies, RecyclerItemClickListener listener){
         mOnMovieClickListener = listener;
         this.movies = movies;
     }
@@ -53,10 +54,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
             return movies.size();
 
         }
-    }
-
-    public interface MovieClickListener{
-        void onMovieClick(int index);
     }
 
 }
