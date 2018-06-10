@@ -11,7 +11,7 @@ import com.example.android.popularmovies_stage2.model.Review;
 
 import java.util.List;
 
-class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder> {
+public class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder> {
 
     private final List<Review> reviews;
 

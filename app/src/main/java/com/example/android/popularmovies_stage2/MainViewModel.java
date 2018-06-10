@@ -14,7 +14,7 @@ import com.example.android.popularmovies_stage2.utilities.NetworkUtilities;
 
 import java.util.List;
 
-class MainViewModel extends AndroidViewModel {
+public class MainViewModel extends AndroidViewModel {
 
     private final AppDatabase mDb;
     private MutableLiveData<List<Movie>> topRatedMovies;

@@ -12,7 +12,7 @@ import com.example.android.popularmovies_stage2.utilities.RecyclerItemClickListe
 
 import java.util.List;
 
-class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
+public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
     final private RecyclerItemClickListener mOnMovieClickListener;
 

@@ -14,7 +14,7 @@ import com.example.android.popularmovies_stage2.utilities.NetworkUtilities;
 
 import java.util.List;
 
-class MovieDetailViewModel extends AndroidViewModel {
+public class MovieDetailViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Video>> videos;
     private MutableLiveData<List<Review>> reviews;
