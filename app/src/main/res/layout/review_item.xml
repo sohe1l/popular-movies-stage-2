@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tv_review_author_label"
+        android:text="@string/author_label"
+        style="@style/TextViewStyle"
+        android:textSize="@dimen/review_author_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        tools:text="Author name"
+        android:id="@+id/tv_review_author"
+        style="@style/TextViewConstraintStyle"
+        android:textSize="@dimen/review_author_text_size"
+        app:layout_constraintStart_toEndOf="@id/tv_review_author_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        tools:text="Review body text..."
+        android:id="@+id/tv_review_body"
+        style="@style/TextViewConstraintStyle"
+        android:textSize="@dimen/review_body_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_review_author"
+        />
+
+</android.support.constraint.ConstraintLayout>

@@ -28,6 +28,9 @@
     <string name="poster_image_ratio">2:3</string>
     <string name="movie_detail_videos_title">Videos</string>
     <string name="movie_detail_reviews_label">Reviews</string>
+    <string name="author_label">Author:</string>
+    <string name="star_icon_content_desc">Star Icon</string>
+    <string name="video_icon_content_desc">Video Icon</string>
 
 
 </resources>

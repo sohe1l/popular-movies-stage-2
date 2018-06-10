@@ -7,32 +7,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
-import com.example.android.popularmovies_stage2.model.Movie;
 import com.example.android.popularmovies_stage2.model.Video;
-import com.example.android.popularmovies_stage2.utilities.NetworkUtilities;
 import com.example.android.popularmovies_stage2.utilities.RecyclerItemClickListener;
 
 import java.util.List;
 
 public class VideoAdapter extends RecyclerView.Adapter<VideoViewHolder> {
 
+    final private RecyclerItemClickListener mClickListener;
     private List<Video> videos;
 
-    final private RecyclerItemClickListener mClickListener;
-
-
-    VideoAdapter(List<Video> videos, RecyclerItemClickListener clickListener){
+    VideoAdapter(List<Video> videos, RecyclerItemClickListener clickListener) {
         this.videos = videos;
         mClickListener = clickListener;
     }
 
-
     @NonNull
     @Override
     public VideoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -43,20 +36,17 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull VideoViewHolder holder, int position) {
-        if(videos.size() > position){
+        if (videos.size() > position) {
             holder.bind(videos.get(position));
         }
     }
 
     @Override
     public int getItemCount() {
-        if(videos == null){
+        if (videos == null) {
             return 0;
-        }else{
-            Log.wtf("VideoAdaptar", "size is :" + videos.size() );
-
+        } else {
             return videos.size();
         }
     }
-
 }

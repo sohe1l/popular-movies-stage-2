@@ -4,11 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModel;
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.android.popularmovies_stage2.database.AppDatabase;
@@ -59,8 +55,6 @@ public class MainViewModel extends AndroidViewModel {
     private void loadTopRatedMovies() {
         new LoadJsonAsync(new LoadJsonAsync.StringAsyncResponse() {
             public void asyncProcessFinish(String res) {
-                Log.wtf("MainViewModel", "Async Top Rated Finished");
-
                 topRatedMovies.setValue(JsonUtilities.parseMovies(res));
             }
         }).execute(
@@ -71,7 +65,6 @@ public class MainViewModel extends AndroidViewModel {
     private void loadPopularMovies() {
         new LoadJsonAsync(new LoadJsonAsync.StringAsyncResponse() {
             public void asyncProcessFinish(String res) {
-                Log.wtf("MainViewModel", "Async Popular Finished");
                 popularMovies.setValue(JsonUtilities.parseMovies(res));
             }
         }).execute(

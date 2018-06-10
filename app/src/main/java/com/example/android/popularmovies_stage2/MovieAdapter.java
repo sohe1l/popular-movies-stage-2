@@ -6,13 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.example.android.popularmovies_stage2.model.Movie;
 import com.example.android.popularmovies_stage2.utilities.RecyclerItemClickListener;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
@@ -22,7 +19,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
     private List<Movie> movies;
 
 
-    MovieAdapter(List<Movie> movies, RecyclerItemClickListener listener){
+    MovieAdapter(List<Movie> movies, RecyclerItemClickListener listener) {
         mOnMovieClickListener = listener;
         this.movies = movies;
     }
@@ -41,16 +38,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-        if(movies.size() > position){
+        if (movies.size() > position) {
             holder.bind(movies.get(position));
         }
     }
 
     @Override
     public int getItemCount() {
-        if(movies == null){
+        if (movies == null) {
             return 0;
-        }else{
+        } else {
             return movies.size();
 
         }

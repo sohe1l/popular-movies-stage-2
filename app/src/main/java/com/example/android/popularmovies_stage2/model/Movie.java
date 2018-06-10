@@ -6,33 +6,55 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Entity(tableName = "movies")
-public class Movie implements Parcelable{
+public class Movie implements Parcelable {
+    public static final String POSTER_BASE_URL = "http://image.tmdb.org/t/p/w185/";
+    public static final String BACKDROP_BASE_URL = "http://image.tmdb.org/t/p/w500/";
+    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
+
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
     private int vote_count;
     private double vote_average;
-
     private double popularity;
-
     @PrimaryKey(autoGenerate = false)
     private int id;
     private Boolean video;
-
     private String title;
-
     private String poster_path;
     private String original_language;
     private String original_title;
-
     private int[] genre_ids;
-
     private String backdrop_path;
     private Boolean adult;
     private String overview;
     private String release_date;
 
+    public Movie() {
+    }
 
+    private Movie(Parcel in) {
 
-    public static final String POSTER_BASE_URL = "http://image.tmdb.org/t/p/w185/";
-    public static final String BACKDROP_BASE_URL = "http://image.tmdb.org/t/p/w500/";
+        vote_count = in.readInt();
+        vote_average = in.readDouble();
+        popularity = in.readDouble();
+        id = in.readInt();
+        video = (Boolean) in.readValue(null);
+        title = in.readString();
+        poster_path = in.readString();
+        original_language = in.readString();
+        original_title = in.readString();
+        genre_ids = in.createIntArray();
+        backdrop_path = in.readString();
+        adult = (Boolean) in.readValue(null);
+        overview = in.readString();
+        setRelease_date(in.readString());
+    }
 
     //<editor-fold desc="Getters and setters">
     public int getVote_count() {
@@ -135,6 +157,8 @@ public class Movie implements Parcelable{
         return overview;
     }
 
+    //</editor-fold>
+
     public void setOverview(String overview) {
         this.overview = overview;
     }
@@ -146,9 +170,6 @@ public class Movie implements Parcelable{
     public void setRelease_date(String release_date) {
         this.release_date = release_date;
     }
-
-    //</editor-fold>
-
 
     @Override
     public int describeContents() {
@@ -171,36 +192,5 @@ public class Movie implements Parcelable{
         dest.writeValue(adult);
         dest.writeString(overview);
         dest.writeString(release_date);
-    }
-
-    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
-
-        public Movie createFromParcel(Parcel in) {
-            return new Movie(in);
-        }
-
-        public Movie[] newArray(int size) {
-            return new Movie[size];
-        }
-    };
-
-    public Movie() { }
-
-    private Movie(Parcel in) {
-
-        vote_count = in.readInt();
-        vote_average = in.readDouble();
-        popularity = in.readDouble();
-        id = in.readInt();
-        video = (Boolean) in.readValue(null);
-        title = in.readString();
-        poster_path = in.readString();
-        original_language = in.readString();
-        original_title = in.readString();
-        genre_ids = in.createIntArray();
-        backdrop_path = in.readString();
-        adult = (Boolean) in.readValue(null);
-        overview = in.readString();
-        setRelease_date(in.readString());
     }
 }

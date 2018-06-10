@@ -29,12 +29,4 @@ public interface MovieDao {
 
     @Query("SELECT * FROM movies where id = :id")
     LiveData<Movie> getMovie(int id);
-
-//
-//    @Update
-//    void updateFavorite(int id, Boolean is_favorite);
-
-
-
-
 }

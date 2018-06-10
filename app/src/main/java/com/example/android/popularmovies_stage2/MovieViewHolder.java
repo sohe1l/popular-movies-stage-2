@@ -16,7 +16,6 @@ public class MovieViewHolder extends RecyclerView.ViewHolder
     private final Context context;
     final private RecyclerItemClickListener mOnMovieClickListener;
 
-
     MovieViewHolder(View itemView, Context context, RecyclerItemClickListener clickListener) {
         super(itemView);
 

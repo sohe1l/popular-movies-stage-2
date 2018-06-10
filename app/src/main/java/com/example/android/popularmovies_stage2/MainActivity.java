@@ -1,65 +1,55 @@
 package com.example.android.popularmovies_stage2;
 
-import com.example.android.popularmovies_stage2.database.AppDatabase;
-import com.example.android.popularmovies_stage2.utilities.NetworkUtilities;
-import com.example.android.popularmovies_stage2.utilities.JsonUtilities;
-import com.example.android.popularmovies_stage2.utilities.LoadJsonAsync;
-
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView.LayoutManager;
-import com.example.android.popularmovies_stage2.model.Movie;
-import com.example.android.popularmovies_stage2.utilities.RecyclerItemClickListener;
-
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.preference.PreferenceManager;
-import android.support.v7.widget.Toolbar;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.content.DialogInterface;
-import android.app.AlertDialog;
-import android.content.Intent;
-import android.util.Log;
-import android.view.MenuItem;
-import java.util.ArrayList;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.LayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import java.util.Arrays;
+import android.view.MenuItem;
+
+import com.example.android.popularmovies_stage2.model.Movie;
+import com.example.android.popularmovies_stage2.utilities.JsonUtilities;
+import com.example.android.popularmovies_stage2.utilities.LoadJsonAsync;
+import com.example.android.popularmovies_stage2.utilities.RecyclerItemClickListener;
+
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity
-        implements RecyclerItemClickListener, LoadJsonAsync.StringAsyncResponse {
+        implements RecyclerItemClickListener{
 
     private final String SORT_ORDER_KEY = "sort_order";
-
     private SharedPreferences sharedPreferences;
-
+    private List<Movie> movies;
     private Toolbar toolbar;
 
-    private List<Movie> movies;
+    @BindView(R.id.rv_movies) RecyclerView rvMovies;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-
-
         refreshMovies();
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,7 +63,6 @@ public class MainActivity extends AppCompatActivity
         int selected = item.getItemId();
 
         switch (selected) {
-
             case R.id.action_sort_popular:
                 setSortOrder(getString(R.string.pref_sort_popular_key));
                 refreshMovies();
@@ -93,10 +82,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    /*
-        The actual key value is saved to shared preferences instead of the index
-        In this way if order of options are changed or new items are added the saved preferences will not be affected
-     */
     private String getSortOrder() {
         return sharedPreferences.getString(SORT_ORDER_KEY, getString(R.string.pref_sort_default_key));
     }
@@ -107,67 +92,57 @@ public class MainActivity extends AppCompatActivity
         editor.apply();
     }
 
-
-
-    private void updateMovies(){
+    private void updateMovies() {
 
         MovieAdapter movieAdapter = new MovieAdapter(movies, this);
 
         LayoutManager layoutManager;
 
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-             layoutManager = new GridLayoutManager(this, 2);
-        } else{
-             layoutManager = new GridLayoutManager(this, 3);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            layoutManager = new GridLayoutManager(this, 2);
+        } else {
+            layoutManager = new GridLayoutManager(this, 3);
         }
-
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_movies);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(movieAdapter);
-
+        rvMovies.setLayoutManager(layoutManager);
+        rvMovies.setHasFixedSize(true);
+        rvMovies.setAdapter(movieAdapter);
     }
 
 
-    private void refreshMovies(){
+    private void refreshMovies() {
         String sortOrder = getSortOrder();
         MainViewModel viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
-        if(sortOrder.equals(getString(R.string.pref_sort_favorites_key))){
+        if (sortOrder.equals(getString(R.string.pref_sort_favorites_key))) {
             toolbar.setSubtitle(getString(R.string.pref_favorites_label));
 
             viewModel.getFavoriteMovies().observe(this, new Observer<List<Movie>>() {
                 @Override
                 public void onChanged(@Nullable List<Movie> resMovies) {
-
-                    Log.wtf("MAIN_MAIN", "Observe Updated Fav Movies");
-
                     movies = resMovies;
                     updateMovies();
                 }
             });
 
-        }else{
-            if(sortOrder.equals(getString(R.string.pref_sort_popular_key))){
+        } else {
+            if (sortOrder.equals(getString(R.string.pref_sort_popular_key))) {
                 toolbar.setSubtitle(getString(R.string.pref_sort_popular_label));
 
                 viewModel.getPopularMovies().observe(this, new Observer<List<Movie>>() {
                     @Override
                     public void onChanged(@Nullable List<Movie> resMovies) {
-                        Log.wtf("MAIN_MAIN", "Observe Updated Pop Movies");
 
                         movies = resMovies;
                         updateMovies();
                     }
                 });
 
-            } else if(sortOrder.equals(getString(R.string.pref_sort_top_rated_key))) {
+            } else if (sortOrder.equals(getString(R.string.pref_sort_top_rated_key))) {
                 toolbar.setSubtitle(getString(R.string.pref_sort_top_rated_label));
 
                 viewModel.getTopRatedMovies().observe(this, new Observer<List<Movie>>() {
                     @Override
                     public void onChanged(@Nullable List<Movie> resMovies) {
-                        Log.wtf("MAIN_MAIN", "Observe Updated Top Movies");
 
                         movies = resMovies;
                         updateMovies();
@@ -175,17 +150,9 @@ public class MainActivity extends AppCompatActivity
                 });
             }
 
-//            new LoadJsonAsync(this).execute(
-//                    NetworkUtilities.getUrl(sortOrder, this)
-//            );
         }
     }
 
-    @Override
-    public void asyncProcessFinish(String res) {
-        movies = JsonUtilities.parseMovies(res);
-        updateMovies();
-    }
 
     @Override
     public void onRecyclerItemClicked(int index) {

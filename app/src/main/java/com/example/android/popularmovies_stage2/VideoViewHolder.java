@@ -8,10 +8,10 @@ import com.example.android.popularmovies_stage2.model.Video;
 import com.example.android.popularmovies_stage2.utilities.RecyclerItemClickListener;
 
 public class VideoViewHolder extends RecyclerView.ViewHolder
-    implements View.OnClickListener{
+        implements View.OnClickListener {
 
-    private TextView videoText;
     final private RecyclerItemClickListener mClickListener;
+    private TextView videoText;
 
 
     VideoViewHolder(View itemView, RecyclerItemClickListener clickListener) {
@@ -24,12 +24,12 @@ public class VideoViewHolder extends RecyclerView.ViewHolder
     }
 
 
-    void bind(Video video){
-        videoText.setText( video.getName() );
+    void bind(Video video) {
+        videoText.setText(video.getName());
     }
 
 
     public void onClick(View v) {
-        mClickListener.onRecyclerItemClicked( getAdapterPosition() );
+        mClickListener.onRecyclerItemClicked(getAdapterPosition());
     }
 }

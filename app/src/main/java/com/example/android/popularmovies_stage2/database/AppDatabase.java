@@ -1,16 +1,10 @@
 package com.example.android.popularmovies_stage2.database;
 
-import android.arch.persistence.db.SupportSQLiteOpenHelper;
 import android.arch.persistence.room.Database;
-import android.arch.persistence.room.DatabaseConfiguration;
-import android.arch.persistence.room.InvalidationTracker;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
-import android.arch.persistence.room.TypeConverter;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.example.android.popularmovies_stage2.model.Movie;
 
@@ -34,7 +28,6 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     public abstract MovieDao taskDao();
-
 
 
 }
