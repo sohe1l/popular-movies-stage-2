@@ -17,8 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.android.popularmovies_stage2.model.Movie;
-import com.example.android.popularmovies_stage2.utilities.JsonUtilities;
-import com.example.android.popularmovies_stage2.utilities.LoadJsonAsync;
 import com.example.android.popularmovies_stage2.utilities.RecyclerItemClickListener;
 
 import java.util.List;
@@ -35,7 +33,8 @@ public class MainActivity extends AppCompatActivity
     private List<Movie> movies;
     private Toolbar toolbar;
 
-    @BindView(R.id.rv_movies) RecyclerView rvMovies;
+    @BindView(R.id.rv_movies)
+    RecyclerView rvMovies;
 
 
     @Override

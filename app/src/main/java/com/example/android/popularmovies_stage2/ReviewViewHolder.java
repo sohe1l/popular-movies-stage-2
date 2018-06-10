@@ -8,8 +8,8 @@ import com.example.android.popularmovies_stage2.model.Review;
 
 public class ReviewViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView authorText;
-    private TextView reviewText;
+    private final TextView authorText;
+    private final TextView reviewText;
 
     ReviewViewHolder(View itemView) {
         super(itemView);

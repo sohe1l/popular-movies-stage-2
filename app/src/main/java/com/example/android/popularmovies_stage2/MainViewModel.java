@@ -5,7 +5,6 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.example.android.popularmovies_stage2.database.AppDatabase;
 import com.example.android.popularmovies_stage2.model.Movie;
@@ -15,9 +14,9 @@ import com.example.android.popularmovies_stage2.utilities.NetworkUtilities;
 
 import java.util.List;
 
-public class MainViewModel extends AndroidViewModel {
+class MainViewModel extends AndroidViewModel {
 
-    private AppDatabase mDb;
+    private final AppDatabase mDb;
     private MutableLiveData<List<Movie>> topRatedMovies;
     private MutableLiveData<List<Movie>> popularMovies;
     private LiveData<List<Movie>> favoriteMovies;

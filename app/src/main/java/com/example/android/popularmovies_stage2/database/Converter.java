@@ -1,12 +1,11 @@
 package com.example.android.popularmovies_stage2.database;
 
 import android.arch.persistence.room.TypeConverter;
-import android.arch.persistence.room.util.StringUtil;
 import android.util.Log;
 
 import java.util.Arrays;
 
-public class Converter {
+class Converter {
 
     private final static String LOG_TAG = "Converter";
 

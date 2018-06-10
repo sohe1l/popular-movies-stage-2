@@ -3,7 +3,6 @@ package com.example.android.popularmovies_stage2;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +11,9 @@ import com.example.android.popularmovies_stage2.model.Review;
 
 import java.util.List;
 
-public class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder> {
+class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder> {
 
-    private List<Review> reviews;
+    private final List<Review> reviews;
 
     ReviewAdapter(List<Review> reviews) {
         this.reviews = reviews;

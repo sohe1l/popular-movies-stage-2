@@ -22,7 +22,7 @@ public class MovieViewHolder extends RecyclerView.ViewHolder
         this.context = context;
         mOnMovieClickListener = clickListener;
 
-        imageView = (ImageView) itemView.findViewById(R.id.imgv_movie);
+        imageView = itemView.findViewById(R.id.imgv_movie);
 
         itemView.setOnClickListener(this);
     }

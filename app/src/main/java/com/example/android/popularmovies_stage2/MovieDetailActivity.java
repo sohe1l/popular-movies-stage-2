@@ -29,27 +29,37 @@ import butterknife.ButterKnife;
 
 public class MovieDetailActivity extends AppCompatActivity implements RecyclerItemClickListener {
 
-    Boolean isFavorite = false;
-    int star_on_res_id;
-    int star_off_res_id;
+    private Boolean isFavorite = false;
+    private int star_on_res_id;
+    private int star_off_res_id;
     private AppDatabase mDb;
     private Movie movie;
     private List<Video> videos;
     private List<Review> reviews;
 
-    @BindView(R.id.imgv_detail_poster) ImageView imgv_poster;
-    @BindView(R.id.imgv_detail_backdrop) ImageView imgv_backdrop;
-    @BindView(R.id.movie_title_tv) TextView tv_movie_title;
+    @BindView(R.id.imgv_detail_poster)
+    ImageView imgv_poster;
+    @BindView(R.id.imgv_detail_backdrop)
+    ImageView imgv_backdrop;
+    @BindView(R.id.movie_title_tv)
+    TextView tv_movie_title;
 
-    @BindView(R.id.movie_release_date_tv) TextView tv_release_date;
-    @BindView(R.id.movie_vote_average_tv) TextView tv_vote_average;
-    @BindView(R.id.movie_overview_tv) TextView tv_overview;
-    @BindView(R.id.tv_reviews_title) TextView tv_reviews_title;
+    @BindView(R.id.movie_release_date_tv)
+    TextView tv_release_date;
+    @BindView(R.id.movie_vote_average_tv)
+    TextView tv_vote_average;
+    @BindView(R.id.movie_overview_tv)
+    TextView tv_overview;
+    @BindView(R.id.tv_reviews_title)
+    TextView tv_reviews_title;
 
-    @BindView(R.id.fav_iv) ImageView imgv_fav;
+    @BindView(R.id.fav_iv)
+    ImageView imgv_fav;
 
-    @BindView(R.id.rv_videos) RecyclerView rvVideos;
-    @BindView(R.id.rv_reviews) RecyclerView rvReviews;
+    @BindView(R.id.rv_videos)
+    RecyclerView rvVideos;
+    @BindView(R.id.rv_reviews)
+    RecyclerView rvReviews;
 
 
     @Override

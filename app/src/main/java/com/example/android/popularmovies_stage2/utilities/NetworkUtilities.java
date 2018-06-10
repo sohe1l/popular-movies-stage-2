@@ -2,7 +2,6 @@ package com.example.android.popularmovies_stage2.utilities;
 
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
 
 import com.example.android.popularmovies_stage2.BuildConfig;
 import com.example.android.popularmovies_stage2.R;

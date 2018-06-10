@@ -5,7 +5,6 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.example.android.popularmovies_stage2.model.Review;
 import com.example.android.popularmovies_stage2.model.Video;
@@ -15,7 +14,7 @@ import com.example.android.popularmovies_stage2.utilities.NetworkUtilities;
 
 import java.util.List;
 
-public class MovieDetailViewModel extends AndroidViewModel {
+class MovieDetailViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Video>> videos;
     private MutableLiveData<List<Review>> reviews;

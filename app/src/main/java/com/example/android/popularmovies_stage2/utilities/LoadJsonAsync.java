@@ -7,7 +7,7 @@ import java.net.URL;
 public class LoadJsonAsync extends AsyncTask<URL, Void, String> {
 
 
-    private StringAsyncResponse delegate = null;
+    private StringAsyncResponse delegate;
 
     public LoadJsonAsync(StringAsyncResponse delegate) {
         this.delegate = delegate;

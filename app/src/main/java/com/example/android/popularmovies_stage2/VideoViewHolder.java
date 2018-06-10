@@ -11,7 +11,7 @@ public class VideoViewHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener {
 
     final private RecyclerItemClickListener mClickListener;
-    private TextView videoText;
+    private final TextView videoText;
 
 
     VideoViewHolder(View itemView, RecyclerItemClickListener clickListener) {

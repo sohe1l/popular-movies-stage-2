@@ -12,11 +12,11 @@ import com.example.android.popularmovies_stage2.utilities.RecyclerItemClickListe
 
 import java.util.List;
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
+class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
     final private RecyclerItemClickListener mOnMovieClickListener;
 
-    private List<Movie> movies;
+    private final List<Movie> movies;
 
 
     MovieAdapter(List<Movie> movies, RecyclerItemClickListener listener) {

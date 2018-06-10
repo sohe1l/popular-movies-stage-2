@@ -3,7 +3,6 @@ package com.example.android.popularmovies_stage2;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +12,10 @@ import com.example.android.popularmovies_stage2.utilities.RecyclerItemClickListe
 
 import java.util.List;
 
-public class VideoAdapter extends RecyclerView.Adapter<VideoViewHolder> {
+class VideoAdapter extends RecyclerView.Adapter<VideoViewHolder> {
 
     final private RecyclerItemClickListener mClickListener;
-    private List<Video> videos;
+    private final List<Video> videos;
 
     VideoAdapter(List<Video> videos, RecyclerItemClickListener clickListener) {
         this.videos = videos;
